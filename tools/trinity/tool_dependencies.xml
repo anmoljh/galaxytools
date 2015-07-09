@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<tool_dependency>
+    <package name="trinityrnaseq" version="2013_08_14">
+        <repository changeset_revision="9be1cbdae115" name="package_trinityrnaseq_2013_08_14" owner="jjohnson" toolshed="http://toolshed.g2.bx.psu.edu" />
+    </package>
+</tool_dependency>
