@@ -5,12 +5,12 @@
         <requirement type="package" version="2013_08_14">trinityrnaseq</requirement>
     </requirements>
 
-    <command interpreter='perl'>TrinityStats.pl  $fastafile  &gt; $statsfile 2&gt;&amp;1;</command>
+    <command>\$TRINITY_HOME/util/TrinityStats.pl  $fastafile  &gt; $statsfile 2&gt;&amp;1;</command>
 
     <inputs>
 	    <!-- Required -->
 
-	    <param name='fastafile'  type="data" format="fasta"  label='fastafile' help='Assembled fasta file'/>
+	    <param name='fastafile'  type="data" format="fasta" label='Trinity Assembly' help='Trinity Assembled fasta file'/>
   
 	     <!-- Optional -->
 
