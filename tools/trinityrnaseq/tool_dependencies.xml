@@ -4,6 +4,6 @@
         <repository changeset_revision="b96cec296f1d" name="package_trinityrnaseq_r20140717" prior_installation_required="True" owner="anmoljh" toolshed="http://toolshed.g2.bx.psu.edu" />
     </package>
     <package name="bowtie" version="0.12.7"> 
-	<repository changeset_revision="9f9f38617a98" name="package_bowtie_0.12.7" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />	
+	<repository changeset_revision="9f9f38617a98" name="package_bowtie_0_12_7" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />	
     </package>
 </tool_dependency>
