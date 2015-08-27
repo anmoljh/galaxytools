@@ -6,6 +6,7 @@
     <description>De novo assembly of RNA-Seq data Using Trinity</description>
     <requirements>
         <requirement type="package" version="r20140717">trinityrnaseq</requirement>
+        <requirement type="package" version="0.12.7">bowtie</requirement>
     </requirements>
     <command>
         Trinity --JM $JM --CPU $CPU
