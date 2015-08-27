@@ -1,8 +1,8 @@
-<tool id='id_trinity_stats' name='Trinity Stats' version='1.0'>
+<tool id='id_trinity_stats' name='Trinity Stats' version='r20140717'>
     <description></description>
 
     <requirements>
-        <requirement type="package" version="2013_08_14">trinityrnaseq</requirement>
+        <requirement type="package" version="r20140717">trinityrnaseq</requirement>
     </requirements>
 
     <command>\$TRINITY_HOME/util/TrinityStats.pl  $fastafile  &gt; $statsfile 2&gt;&amp;1;</command>
