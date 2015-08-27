@@ -3,7 +3,7 @@
     <package name="trinityrnaseq" version="r20140717">
         <repository changeset_revision="b96cec296f1d" name="package_trinityrnaseq_r20140717" prior_installation_required="True" owner="anmoljh" toolshed="http://toolshed.g2.bx.psu.edu" />
     </package>
-    <package name="bowtie2" version="2.2.5"> 
-	<repository changeset_revision="8b300d21e6bd" name="package_bowtie_2_2_5" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />	
+    <package name="bowtie" version="1.0.0"> 
+	<repository changeset_revision="9fcaaedbbfd6" name="package_bowtie_1_0_0" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />	
     </package>
 </tool_dependency>
