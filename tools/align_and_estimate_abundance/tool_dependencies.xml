@@ -12,6 +12,9 @@
     <package name="samtools" version="1.2">
 	<repository changeset_revision="f6ae3ba3f3c1" name="package_samtools_1_2" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />
     </package>
+    <!--package name="rsem" version="1.1.17">
+	<repository changeset_revision="cd7f70d4c687" name="package_rsem_1_1_7" prior_installation_required="True" owner="jjohnson" toolshed="http://toolshed.g2.bx.psu.edu" />
+    </package-->	
     <package name="eXpress" version="1.5.1">
 	<repository changeset_revision="93017e8743e5" name="package_express_1_5_1" prior_installation_required="True" owner="iuc" toolshed="http://toolshed.g2.bx.psu.edu" />
     </package>	
