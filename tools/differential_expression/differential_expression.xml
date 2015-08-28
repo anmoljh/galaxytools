@@ -1,0 +1,94 @@
+<tool id='differential_expression' name='Differential Expression' version='r20140717'>
+
+	<description>Generates results for DE </description>
+	
+	<requirements>
+		<requirement type="package" version="r20140717">trinityrnaseq</requirement>
+	</requirements>
+	
+	<command>
+echo  -e "Differential Expression Log File" &gt; $output_log 2&gt;&amp;1;
+
+## Step 0: preprocess  input_file preparaton
+
+        #for $i in $isoform_sample:
+                cp -s $i.isoform_sample_matrix $i.sample_name;
+        #end for;
+
+
+## Step 1: abundance_estimates_to_matrix
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\# Step 1: abundance_estimates_to_matrix" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+
+
+\$HOME_TRINITY/util/abundance_estimates_to_matrix.pl
+        --est_method $est_method
+        #for $i in $isoform_sample:
+                $i.sample_name
+        #end for
+        &gt;&gt; $output_log 2&gt;&amp;1;
+
+
+## Step 2: run_DE_analysis
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\# Step 2: run_DE_analysis" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+
+\$HOME_TRINITY/Analysis/DifferentialExpression/run_DE_analysis.pl
+        --matrix matrix.counts.matrix
+        --method $method
+        --output result_dir
+        &gt;&gt; $output_log 2&gt;&amp;1;
+
+## Step 3: analyze_diff_expr
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "\#\# Step 3: analyze_diff_expr" &gt;&gt;  $output_log  2&gt;&amp;1;
+echo -e "" &gt;&gt;  $output_log  2&gt;&amp;1;
+
+cd result_dir &amp;&amp; \$HOME_TRINITY/Analysis/DifferentialExpression/analyze_diff_expr.pl
+
+        --matrix ../matrix.TMM.fpkm.matrix
+
+        &gt;&gt; $output_log 2&gt;&amp;1;
+
+pwd;
+cd .. &amp;&amp; zip -r results.zip result_dir;
+</command>
+
+
+<inputs>
+	 <!-- Required -->
+
+	<param name='est_method' type='select' display="radio"  label='Select est_method'>
+        	<option value="RSEM" selected='true'>RSEM</option>
+        	<option value="eXpress">eXpress</option>
+  	</param>
+
+
+   <repeat name="isoform_sample" title="Isoform Sample" min="2">
+        <param name="sample_name" type="text" label="Sample Name" help="Only alpha-numerical name without space.">
+                <validator type="empty_field" message="don't leave the field empty!"/>
+        </param>
+        <param name="isoform_sample_matrix" type="data" label="Isoform Sample Matrix"/>
+   </repeat>
+
+  	<param name='method' type="select" label="Select Method" >
+         	<option value="edgeR">edgeR</option>
+         	<option value="DESeq">DESeq</option>
+         	<option value="DESeq2">DESeq2</option>
+  	</param>
+
+ 	<!-- Optional -->
+
+</inputs>
+
+<outputs>
+        <data name='de_output' format='zip' label="${tool.name} on ${on_string}: compressed_output" from_work_dir="results.zip"/>
+        <data name='output_log' format='txt' label="${tool.name} on ${on_string} : matrix_log"/>
+</outputs>
+</tool>
+
