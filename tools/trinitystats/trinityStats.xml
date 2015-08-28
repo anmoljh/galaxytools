@@ -1,4 +1,4 @@
-<tool id='id_trinity_stats' name='Trinity Stats' version='r20140717'>
+<tool id='trinity_stats' name='Trinity Stats' version='r20140717'>
     <description></description>
 
     <requirements>
