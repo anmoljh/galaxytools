@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <repositories description="This is a metapackage that includes the trinity-suite (trinityrnaseq trinitystats etc) wrappers and dependencies.">
     <repository changeset_revision="767d6b0b41ad" name="trinityrnaseq" owner="anmoljh" toolshed="https://toolshed.g2.bx.psu.edu" />
+    <repository changeset_revision="f0bd0c42eb2e" name="insilico_read_normalization" owner="anmoljh" toolshed="https://toolshed.g2.bx.psu.edu" />
+    <repository changeset_revision="5587e12bd075" name="align_and_estimate_abundance" owner="anmoljh" toolshed="https://toolshed.g2.bx.psu.edu" />	
     <repository changeset_revision="8fd7b0c6ec0e" name="trinitystats"  owner="anmoljh"  toolshed="https://toolshed.g2.bx.psu.edu" />
 </repositories>
