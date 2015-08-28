@@ -1,0 +1,122 @@
+<tool id='transdecoder' name='transDecoder' version='r20170717'>
+
+  <description>finding coding regions within transcripts</description>
+
+  <requirements>
+		<requirement type="package" version="r20140717">trinityrnaseq</requirement>
+  </requirements>
+
+  <command> \$TRINITY_HOME/trinity-plugins/transdecoder/TransDecoder
+
+        -t $transcript
+
+        #if str($optional.parameters) == 'yes':
+                #if ($train):
+                        --train $train
+                #end if
+
+                #if ($min_protein_length):
+                        -m $min_protein_length
+                #end if
+
+                #if ($genetic_code):
+                        -G $genetic_code
+                #end if
+
+                #if ($strand-specific):
+                        $strand-specific
+                #end if
+
+                #if ($lottmn):
+                        -T $lottmm
+                #end if
+
+                #if ($retain_long_orfs):
+                        --retain_long_orfs $retain_long_orfs
+                #end if
+        #end if
+
+        #if str($pfam.options) == 'yes':
+                #if ($pfam_db):
+                        --search_pfam $pfam_db
+                #end if
+
+                #if ($CPU):
+                        --CPU $CPU
+                #end if
+        #end if
+
+        ##log file
+        &gt; $transdecoder_log 2&gt;&amp;1;
+
+
+        ## output renaming
+
+        cp -s dataset_*.dat.transdecoder.pep transcript.transdecoder.pep;
+        cp -s dataset_*.dat.transdecoder.cds transcript.transdecoder.cds;
+        cp -s dataset_*.dat.transdecoder.bed transcript.transdecoder.bed;
+        cp -s dataset_*.dat.transdecoder.gff3 transcript.transdecoder.gff3;
+        cp -s dataset_*.dat.transdecoder.mRNA transcript.transdecoder.mRNA;
+  </command>
+
+  <inputs>
+ 	 <!-- Required -->
+
+    	<param name='transcript' type='data' label='Transcripts [ in fasta format ]' help=' -t &lt; string &gt; ; Assembled reads in fasta file format'/>
+
+ 	<!-- Optional -->
+
+    <conditional name='optional'>
+        <param name='parameters' type='select' label='Use Optional Parameters'>
+                <option value='no'>NO</option>
+                <option value='yes'>YES</option>
+        </param>
+        <when value='no'/>
+        <when value='yes'>
+                <param name='train' type='data' optional='true' label='FASTA file with ORFs to train Markov Mod for protein identification' help='--train &lt; string &gt; ; FASTA file with ORFs to train Markov Mod for protein identification; otherwise longest non-redundant ORFs used' />
+                <param name='min_protein_length' type='integer' optional='true' value='100' label='Minimum Protein Length' help='-m &lt; int &gt; ;minimum protein length (default: 100)'/>
+                <param name='genetic_code' type='select' optional='true' label='Select Genetic Code' help=' -G &lt; string &gt; ; genetic code (default is "universal")'>
+                        <option value='universal' selected='true'>Universal</option>
+                        <option value='Euplotes'>Euplotes</option>
+                        <option value='Tetrahymena'>Tetrahymena</option>
+                        <option value='Candida'>Candida</option>
+                        <option value='Acetabularia'>Acetabularia</option>
+                </param>
+                <param name='strand-specific' type='boolean' truevalue='-S' falsevalue='' optional='true' label='Strand-Specific [ -S ]' help='strand-specific (only analyzes top strand)'/>
+                <param name='lottmm' type='integer' optional='true' value='500' label=' -T ; Needs a label ??? ' help='-T &lt; int &gt; ; If no --train, top longest ORFs to train Markov Model (hexamer stats) (default: 500)'/>
+                <param name='retain_long_orfs' type="integer" optional='true' value="900" label=' --retain_long_orfs ; Needs a label ??? ' help='--retain_long_orfs &lt; int &gt; ; Retain all ORFs found that are equal or longer than these many nucleotides even if no other evidence marks it as coding (default: 900 bp => 300aa)' />
+         </when>
+     </conditional>
+
+
+    <!-- Pfam Options -->
+
+    <conditional name='pfam'>
+        <param name='options' type='select' label='Use Pfam Options [ Optional ]'>
+                <option value='no'>NO</option>
+                <option value='yes'>YES</option>
+        </param>
+        <when value='no'/>
+        <when value='yes'>
+                <param name='pfam_db' type='select' label='Search pfam database' help=' --search_pfam  &lt; pfam_db.hmm &gt; ; /path/to/pfam_db.hmm to search using hmmscan'>
+                        <options from_file="pfam_db.loc">
+                                <column name="name" index="0"/>
+                                <column name="value" index="2"/>
+                        </options>
+                </param>
+                <param name='CPU' type='integer' value='2'  label='CPU' help='--CPU &lt; int &gt; Number of CPU for the job'/>
+        </when>
+    </conditional>
+
+</inputs>
+
+<outputs>
+        <data name='transdecoder_pep' format='fasta' label="${tool.name} on ${on_string}: pep" from_work_dir="transcript.transdecoder.pep"/>
+        <data name='transdecoder_cds' format='fasta' label="${tool.name} on ${on_string}: cds" from_work_dir="transcript.transdecoder.cds"/>
+        <data name='transdecoder_bed' format='bed' label="${tool.name} on ${on_string}: bed" from_work_dir="transcript.transdecoder.bed"/>
+        <data name='transdecoder_gff3' format='tabular' label="${tool.name} on ${on_string}: gff3" from_work_dir="transcript.transdecoder.gff3"/>
+        <data name='transdecoder_mRNA' format='fasta' label="${tool.name} on ${on_string}: mRNA" from_work_dir="transcript.transdecoder.mRNA"/>
+        <data name='transdecoder_log' format='txt' label="${tool.name} on ${on_string}: log" />
+</outputs>
+</tool>
+
