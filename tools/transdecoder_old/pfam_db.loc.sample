@@ -1,0 +1,5 @@
+## pfam_db.loc file ##
+
+##_1.name_##   	##_2.path_##
+
+#pfam_db_24Aug2015	/path/to/tool-data/pfam_db.hmm
