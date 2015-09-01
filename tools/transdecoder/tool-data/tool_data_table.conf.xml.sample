@@ -1,6 +1,6 @@
 <tables>
 	<table name="pfam_databases" comment_char="#">
-		<columns>dbkey, name, path</columns>
+		<columns>unique_id, name, path</columns>
 		<file_path="tool-data/pfam_db.loc" />
 	</table>
 </tables>
