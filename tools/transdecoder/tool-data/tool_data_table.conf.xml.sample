@@ -1,0 +1,6 @@
+<tables>
+	<table name="pfam_databases" comment_char="#">
+		<columns>value, name, path</columns>
+		<file_path = "tool_data/pfam_db.loc" />
+	</table>
+</tables>
