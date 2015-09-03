@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <tool_dependency>
+    <package name="ncurses" version="5.9">
+        <repository changeset_revision="5e1760c773ba" name="package_ncurses_5_9" owner="iuc" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu" />
+    </package>
+    <package name="zlib" version="1.2.8">
+        <repository changeset_revision="63a4a902cda2" name="package_zlib_1_2_8" owner="iuc" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu" />
+    </package>
     <package name="trinityrnaseq" version="r20140717">
         <install version="1.0">
             <actions>
