@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <tool_dependency>
     <package name="ncurses" version="5.9">
-        <repository changeset_revision="5e1760c773ba" name="package_ncurses_5_9" owner="iuc" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu" />
+        <repository changeset_revision="93ce0192b9db" name="package_ncurses_5_9" owner="anmoljh" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu" />
     </package>
     <package name="zlib" version="1.2.8">
         <repository changeset_revision="63a4a902cda2" name="package_zlib_1_2_8" owner="iuc" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu" />
@@ -10,6 +10,15 @@
         <install version="1.0">
             <actions>
                 <action type="download_by_url">http://sourceforge.net/projects/trinityrnaseq/files/trinityrnaseq_r20140717.tar.gz</action>
+		<action type="set_environment_for_install">
+                    <repository changeset_revision="93ce0192b9db" name="package_ncurses_5_9"  owner="anmoljh" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu">
+                    	<package name="ncurses" version="5.9" />
+                    </repository>
+                    <repository changeset_revision="63a4a902cda2" name="package_zlib_1_2_8" owner="iuc" prior_installation_required="True" toolshed="https://toolshed.g2.bx.psu.edu">
+                        <package name="zlib" version="1.2.8" />
+                    </repository>
+                </action>
+                <action type="shell_command">sed -i.bak -e '/tar -zxvf ${RSEM_CODE}.tar.gz/a \\tsed -i.bak -e "s/-lcurses/-lncurses/" ./tmp.rsem/sam/Makefile' trinity-plugins/Makefile</action>
                 <action type="shell_command">make</action>
                 <action type="move_directory_files">
                     <source_directory>.</source_directory>
